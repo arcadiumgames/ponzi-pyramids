@@ -12,7 +12,7 @@ contract SimplePonzi {
     // document new backer
     address previousBacker = currentBacker;
     currentBacker = msg.sender;
-    currentContribution = msg.value; 
+    currentContribution = msg.value;
 
     // payout for previous backer
     previousBacker.send(msg.value);-
