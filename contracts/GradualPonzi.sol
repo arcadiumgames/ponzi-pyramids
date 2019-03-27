@@ -5,18 +5,18 @@ contract GradualPonzi {
   mapping(address => uint) public balances;
   uint public constant MINIMUM_INVESTMENT = 1e15;
 
-  function GradualPonzi() public {
-    investors.push(msg.sender);
+  constructor () public {
+    backers.push(msg.sender);
   }
 
-  function () public payable {
+  function () external payable {
     require(msg.value >= MINIMUM_INVESTMENT);
     uint eachBackerGets = msg.value / backers.length;
 
-    for (uint i = 0; i < investors.length; i++) {
-      balances[investors[i]] += eachBackerGets;
+    for (uint i = 0; i < backers.length; i++) {
+      balances[backers[i]] += eachBackerGets;
     }
-    investors.push(msg.sender);
+    backers.push(msg.sender);
   }
 
   function withdraw() public {
